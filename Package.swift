@@ -4,23 +4,28 @@
 import PackageDescription
 
 let package = Package(
-    name: "Btrack",
+    name: "BTrack",
     products: [
         .library(
-            name: "Btrack",
-            targets: ["Btrack"]),
+            name: "BTrack",
+            targets: ["BTrack"]),
     ],
     targets: [
         .systemLibrary(
-            name: "libsamplerate",
-            pkgConfig: "libsamplerate",
+            name: "Clibsamplerate",
+            pkgConfig: "samplerate",
             providers: [
                 .brew(["libsamplerate"]),
             ]
         ),
         .target(
-            name: "Btrack",
-            dependencies: ["libsamplerate"],
+            name: "kiss_fft",
+            path: "libs/kiss_fft130",
+            publicHeadersPath: "."
+        ),
+        .target(
+            name: "BTrack",
+            dependencies: ["Clibsamplerate", "kiss_fft"],
             path: "src",
             exclude: [
                 "CMakeLists.txt",
@@ -28,18 +33,26 @@ let package = Package(
             publicHeadersPath: ".",
             cSettings: [
                 .headerSearchPath("."),
-                .headerSearchPath("../libs/kiss_fft130"),
                 .headerSearchPath("opt/homebrew/include"),
                 .define("USE_KISS_FFT"),
             ]
         ),
         .testTarget(
-            name: "BtrackTests",
-            dependencies: ["Btrack"],
+            name: "BTrackTests",
+            dependencies: ["BTrack", "kiss_fft"],
             path: "tests",
             exclude: [
                 "CMakeLists.txt"
+            ],
+            sources: [
+                "main.cpp",
+                "Test_BTrack.cpp"
+            ],
+            cSettings: [
+                .headerSearchPath("./doctest"),
+                .headerSearchPath("../src"),
             ]
         ),
-    ]
+    ],
+    cxxLanguageStandard: .cxx17
 )

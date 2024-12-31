@@ -1,0 +1,5 @@
+module Clibsamplerate [system] {
+  header "samplerate.h"
+  link "samplerate"
+  export *
+}
