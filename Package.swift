@@ -23,8 +23,8 @@ let package = Package(
             dependencies: ["Clibsamplerate"],
             path: "src",
             sources: [
-                "Btrack.cpp",
-                "Btrack.h",
+                "BTrack.cpp",
+                "BTrack.h",
                 "OnsetDetectionFunction.cpp",
                 "OnsetDetectionFunction.h",
                 "CircularBuffer.h",
