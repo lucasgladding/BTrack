@@ -30,7 +30,7 @@ let package = Package(
                 "CircularBuffer.h",
             ],
             publicHeadersPath: ".",
-            cSettings: [
+            cxxSettings: [
                 .headerSearchPath("."),
                 .headerSearchPath("../libs/kiss_fft130"),
                 .headerSearchPath("opt/homebrew/include"),
@@ -46,7 +46,7 @@ let package = Package(
                 "../libs/kiss_fft130/kiss_fft.c",
                 "Test_BTrack.cpp",
             ],
-            cSettings: [
+            cxxSettings: [
                 .headerSearchPath("./doctest"),
                 .headerSearchPath("../src"),
                 .headerSearchPath("../libs/kiss_fft130"),
