@@ -19,38 +19,37 @@ let package = Package(
             ]
         ),
         .target(
-            name: "kiss_fft",
-            path: "libs/kiss_fft130",
-            publicHeadersPath: "."
-        ),
-        .target(
             name: "BTrack",
-            dependencies: ["Clibsamplerate", "kiss_fft"],
+            dependencies: ["Clibsamplerate"],
             path: "src",
-            exclude: [
-                "CMakeLists.txt",
+            sources: [
+                "Btrack.cpp",
+                "Btrack.h",
+                "OnsetDetectionFunction.cpp",
+                "OnsetDetectionFunction.h",
+                "CircularBuffer.h",
             ],
             publicHeadersPath: ".",
             cSettings: [
                 .headerSearchPath("."),
+                .headerSearchPath("../libs/kiss_fft130"),
                 .headerSearchPath("opt/homebrew/include"),
                 .define("USE_KISS_FFT"),
             ]
         ),
         .testTarget(
             name: "BTrackTests",
-            dependencies: ["BTrack", "kiss_fft"],
+            dependencies: ["BTrack"],
             path: "tests",
-            exclude: [
-                "CMakeLists.txt"
-            ],
             sources: [
                 "main.cpp",
-                "Test_BTrack.cpp"
+                "../libs/kiss_fft130/kiss_fft.c",
+                "Test_BTrack.cpp",
             ],
             cSettings: [
                 .headerSearchPath("./doctest"),
                 .headerSearchPath("../src"),
+                .headerSearchPath("../libs/kiss_fft130"),
             ]
         ),
     ],
