@@ -12,15 +12,20 @@ let package = Package(
     ],
     targets: [
         .systemLibrary(
-            name: "Clibsamplerate",
+            name: "libsamplerate",
             pkgConfig: "samplerate",
             providers: [
                 .brew(["libsamplerate"]),
             ]
         ),
         .target(
+            name: "kiss_fft",
+            path: "libs/kiss_fft130",
+            publicHeadersPath: "."
+        ),
+        .target(
             name: "BTrack",
-            dependencies: ["Clibsamplerate"],
+            dependencies: ["libsamplerate", "kiss_fft"],
             path: "src",
             sources: [
                 "BTrack.cpp",
@@ -37,7 +42,7 @@ let package = Package(
                 .define("USE_KISS_FFT"),
             ]
         ),
-        .testTarget(
+        .executableTarget(
             name: "BTrackTests",
             dependencies: ["BTrack"],
             path: "tests",
@@ -51,7 +56,7 @@ let package = Package(
                 .headerSearchPath("../src"),
                 .headerSearchPath("../libs/kiss_fft130"),
             ]
-        ),
+        )
     ],
     cxxLanguageStandard: .cxx17
 )
