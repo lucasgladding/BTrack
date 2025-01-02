@@ -8,20 +8,18 @@ let package = Package(
     products: [
         .library(
             name: "BTrack",
-            targets: ["BTrack"]),
+            targets: ["BTrack"]
+        ),
     ],
     targets: [
-        .systemLibrary(
-            name: "libsamplerate",
-            pkgConfig: "samplerate",
-            providers: [
-                .brew(["libsamplerate"]),
-            ]
-        ),
         .target(
             name: "kiss_fft",
             path: "libs/kiss_fft130",
             publicHeadersPath: "."
+        ),
+        .systemLibrary(
+            name: "libsamplerate",
+            pkgConfig: "samplerate"
         ),
         .target(
             name: "BTrack",
@@ -38,7 +36,7 @@ let package = Package(
             cxxSettings: [
                 .headerSearchPath("."),
                 .headerSearchPath("../libs/kiss_fft130"),
-                .headerSearchPath("opt/homebrew/include"),
+                .headerSearchPath("usr/local/include"),
                 .define("USE_KISS_FFT"),
             ]
         ),
