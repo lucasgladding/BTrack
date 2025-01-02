@@ -42,7 +42,7 @@ let package = Package(
         ),
         .executableTarget(
             name: "BTrackTests",
-            dependencies: ["BTrack"],
+            dependencies: ["BTrackKit"],
             path: "tests",
             sources: [
                 "main.cpp",
