@@ -4,11 +4,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "BTrack",
+    name: "BTrackKit",
     products: [
         .library(
-            name: "BTrack",
-            targets: ["BTrack"]
+            name: "BTrackKit",
+            targets: ["BTrackKit"]
         ),
     ],
     targets: [
@@ -22,7 +22,7 @@ let package = Package(
             pkgConfig: "samplerate"
         ),
         .target(
-            name: "BTrack",
+            name: "BTrackKit",
             dependencies: ["libsamplerate", "kiss_fft"],
             path: "src",
             sources: [
